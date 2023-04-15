@@ -1,4 +1,4 @@
-create database QLDuLich
+﻿create database QLDuLich
 
 use QLDuLich
 drop table KhachHang
@@ -9,25 +9,28 @@ create table KhachHang(
 	SDT int not null,
 	maBuuChinh int not null,
 	email nvarchar(50),
-	maTruongDoan varchar(7),
-	maCD nvarchar(50)
 );
-drop table ChuyenBay
-create table ChuyenBay(
-	maCB varchar(6),
-	maKH varchar(7) references KhachHang(maKH),
-	hangVe  nvarchar(50),
-	loaiVe nvarchar(50),
-	isNguoiLon bit,
-	addOns nvarchar(50),
-	tgBatDat datetime not null,
-	tgKetThuc datetime not null,
-	tenHangMB nvarchar(20) not null
-	
+go
+create table VaiTroNV(
+	idVaiTro int identity(1,1) primary key,
+	tenVaiTro nvarchar(50) unique
+)
+
+insert into VaiTroNV(tenVaiTro) values('Giám đốc'),('Trưởng phòng kinh doanh'),('Nhân viên kinh doanh'),('Trưởng phòng marketing'),('Nhân viên marketing'),('Trưởng tour')
+
+go
+create table NhanVien(
+	maNV varchar(7) primary key,
+	ho nvarchar(50),
+	ten nvarchar(50),
+	dob Datetime,
+	diaChi nvarchar(255),
+	SDT int,
+	email nvarchar(50),
+	idVaiTro int
 );
-alter table KhachHang
-add constraint FK_TruongDoan
-Foreign key (maTruongDoan) references KhachHang(maKH)
+
+alter table NhanVien add constraint idVaiTroNV_pkey foreign key (idVaiTro) references VaiTroNV(idVaiTro) 
 
 --create table Tour(
 --	tourID varchar(7) primary key,

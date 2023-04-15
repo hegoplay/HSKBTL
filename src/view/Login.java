@@ -5,12 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import test.PlaceholderTextField;
 
 import javax.swing.JPanel;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -29,28 +33,23 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import controller.LoginController;
+
 import java.awt.Toolkit;
+import javax.swing.JPasswordField;
 
 public class Login {
 
 	private JFrame frame;
-	private PlaceholderTextField txtUser;
-
+	public PlaceholderTextField txtUser;
+	private LoginController controller;
+	public JPasswordField passwordField;
+	public JButton btnLogIn;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login window = new Login();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
@@ -67,13 +66,16 @@ public class Login {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 568, 267);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/view/img/background.jpg")));
 		JPanel pnlTitle = new JPanel();
-		pnlTitle.setBackground(new Color(175, 238, 238));
+		pnlTitle.setBackground(new Color(255, 128, 255));
 		frame.getContentPane().add(pnlTitle, BorderLayout.NORTH);
 		
 		JLabel lblNewLabel = new JLabel("Login");
+		lblNewLabel.setForeground(new Color(224, 255, 255));
+		lblNewLabel.setBackground(new Color(255, 182, 193));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		pnlTitle.add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,6 +86,15 @@ public class Login {
 		
 		JPanel panel = new JPanel();
 		pnlCenter.add(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon(Login.class.getResource("/view/img/background.jpg")));
+		panel.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_3_1 = new JLabel("");
+		lblNewLabel_3_1.setIcon(new ImageIcon(Login.class.getResource("/view/img/background.jpg")));
+		panel.add(lblNewLabel_3_1);
 		
 		JPanel userName = new JPanel();
 		pnlCenter.add(userName);
@@ -109,22 +120,19 @@ public class Login {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/view/img/pwd.png")));
 		
-		PlaceholderTextField txtPassword = new PlaceholderTextField();
-		txtPassword.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		txtPassword.setPlaceholder("Mat Khau");
-		txtPassword.setColumns(10);
-		password.add(txtPassword);
+		passwordField = new JPasswordField();
+		password.add(passwordField);
 		
-		JButton btnNewButton = new JButton("Log In");
-		btnNewButton.setIcon(new ImageIcon(Login.class.getResource("/view/img/login.png")));
-		btnNewButton.setFont(new Font("Arial Black", Font.BOLD, 16));
-		btnNewButton.setForeground(new Color(47, 79, 79));
-		btnNewButton.setBackground(new Color(0, 255, 0));
-		btnNewButton.addActionListener(new ActionListener() {
+		btnLogIn = new JButton("Log In");
+		btnLogIn.setIcon(new ImageIcon(Login.class.getResource("/view/img/login.png")));
+		btnLogIn.setFont(new Font("Arial Black", Font.BOLD, 16));
+		btnLogIn.setForeground(new Color(0, 255, 255));
+		btnLogIn.setBackground(new Color(221, 160, 221));
+		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		pnlCenter.add(btnNewButton);
+		pnlCenter.add(btnLogIn);
 		
 		JPanel pnlBottom = new JPanel();
 		frame.getContentPane().add(pnlBottom, BorderLayout.SOUTH);
@@ -143,6 +151,16 @@ public class Login {
 		frame.getContentPane().add(pnlRight, BorderLayout.EAST);
 		Component rigidArea = Box.createRigidArea(new Dimension(20, 20));
 		pnlRight.add(rigidArea);
+		controller = new LoginController(this);
+		btnLogIn.addActionListener(controller);
 	}
-
+	public void access() {
+		frame.setVisible(false);
+	}
+	public void denied() {
+		JOptionPane.showMessageDialog(frame, "Mat Khau Sai");
+	}
+	public JFrame getFrame() {
+		return this.frame;
+	}
 }
