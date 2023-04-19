@@ -32,10 +32,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import component.MainMenuBar;
+
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import javax.swing.JTextArea;
+import java.awt.Panel;
+import java.awt.Button;
+import java.awt.Label;
+import javax.swing.SwingConstants;
+import javax.swing.JToggleButton;
+import javax.swing.JRadioButton;
 
 public class FrmQuanLyKhachSan extends JFrame {
 
@@ -48,6 +58,12 @@ public class FrmQuanLyKhachSan extends JFrame {
 	public JTextPane txtMoTa;
 	public JCheckBox chkboxIsTV;
 	public JCheckBox chkbxDgHoatDong;
+	public JTable tblLoc;
+	public JComboBox<String> cbTinhThanh;
+	public JRadioButton rdbtnGiam;
+	public JCheckBox chkThanhVien1;
+	public JCheckBox chckbxangHotng;
+	public JLabel lblSort;
 	/**
 	 * Launch the application.
 	 */
@@ -69,26 +85,13 @@ public class FrmQuanLyKhachSan extends JFrame {
 	 */
 	public FrmQuanLyKhachSan() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1000,800);
+		setSize(1000,600);
 		setLocationRelativeTo(null); 
-		setTitle("Quan ly khach san");
+		setTitle("Quản lý khách sạn");
 		controller = new KhachSanController(this);
-		JMenuBar menuBar = new JMenuBar();
+		MainMenuBar menuBar = new MainMenuBar(this);
 		setJMenuBar(menuBar);
 		
-		JMenu mnChucNang = new JMenu("Chuc Nang");
-		menuBar.add(mnChucNang);
-		
-		JMenuItem mntmTrangChu = new JMenuItem("TrangChu");
-		mntmTrangChu.setIcon(new ImageIcon(FrmQuanLyKhachSan.class.getResource("/view/img/TrangChu.png")));
-		mnChucNang.add(mntmTrangChu);
-		
-		JSeparator separator = new JSeparator();
-		mnChucNang.add(separator);
-		
-		JMenuItem mntmExit = new JMenuItem("Thoat Chuong Trinh");
-		mntmExit.setIcon(new ImageIcon(FrmQuanLyKhachSan.class.getResource("/view/img/exit.png")));
-		mnChucNang.add(mntmExit);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -96,6 +99,7 @@ public class FrmQuanLyKhachSan extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBackground(new Color(255, 192, 203));
 		contentPane.add(tabbedPane);
 		
 		JPanel pnlThemXoaSua = new JPanel();
@@ -133,7 +137,7 @@ public class FrmQuanLyKhachSan extends JFrame {
 		pnlTinhThanh.add(lblMaTinhThanh);
 		
 		cbMaTinhThanh = new JComboBox<String>();
-		fillCb();
+		
 		cbMaTinhThanh.setFont(new Font("Segoe UI Variable", Font.PLAIN, 18));
 		pnlTinhThanh.add(cbMaTinhThanh);
 		
@@ -168,8 +172,9 @@ public class FrmQuanLyKhachSan extends JFrame {
 		pnlTitle.add(pnlMoTa, BorderLayout.CENTER);
 		pnlMoTa.setLayout(new BoxLayout(pnlMoTa, BoxLayout.X_AXIS));
 		
-		JLabel lblMoTa = new JLabel("Mô tả ");
-		lblMoTa.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
+		JLabel lblMoTa = new JLabel("Mô tả: ");
+		lblMoTa.setBackground(new Color(255, 182, 193));
+		lblMoTa.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		pnlMoTa.add(lblMoTa);
 		
 		txtMoTa = new JTextPane();
@@ -185,9 +190,9 @@ public class FrmQuanLyKhachSan extends JFrame {
 		btnThem.setFont(new Font("SansSerif", Font.PLAIN, 18));
 		pnlChucNang.add(btnThem);
 		
-		JButton btnXóa = new JButton("Xóa");
-		btnXóa.setFont(new Font("SansSerif", Font.PLAIN, 18));
-		pnlChucNang.add(btnXóa);
+		JButton btnXoa = new JButton("Xóa");
+		btnXoa.setFont(new Font("SansSerif", Font.PLAIN, 18));
+		pnlChucNang.add(btnXoa);
 		
 		JButton btnXoaRong = new JButton("Xoá Rỗng");
 		btnXoaRong.setFont(new Font("SansSerif", Font.PLAIN, 18));
@@ -223,15 +228,105 @@ public class FrmQuanLyKhachSan extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JPanel pnlLoc = new JPanel();
-		tabbedPane.addTab("New tab", null, pnlLoc, null);
+		tabbedPane.addTab("Lọc dữ liệu", null, pnlLoc, null);
+		pnlLoc.setLayout(null);
+		
+		JScrollPane sclPaneLoc = new JScrollPane();
+		sclPaneLoc.setBounds(0, 207, 969, 248);
+		pnlLoc.add(sclPaneLoc);
+		
+		tblLoc = new JTable();
+		tblLoc.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"maKS", "tenKS", "tenTinhThanh", "diaChi", "moTa", "laThanhVien", "dangHoatDong"
+				}
+			) {
+				Class[] columnTypes = new Class[] {
+					Integer.class, String.class, String.class, String.class, String.class, Boolean.class, Boolean.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
+		sclPaneLoc.setViewportView(tblLoc);
+		
+		JPanel pnlChucNang1 = new JPanel();
+		pnlChucNang1.setBounds(0, 0, 969, 207);
+		pnlLoc.add(pnlChucNang1);
+		pnlChucNang1.setLayout(new BorderLayout(0, 0));
+		
+		Panel pnlLocDuLieu = new Panel();
+		pnlChucNang1.add(pnlLocDuLieu, BorderLayout.SOUTH);
+		
+		JButton btnLoc = new JButton("Lọc");
+		btnLoc.setToolTipText("Lọc danh sách");
+		pnlLocDuLieu.add(btnLoc);
+		
+		JButton btnCancel = new JButton("Hủy");
+		pnlLocDuLieu.add(btnCancel);
+		
+		JPanel pnlDuLieuLoc = new JPanel();
+		pnlDuLieuLoc.setBorder(new TitledBorder(new LineBorder(new Color(255, 182, 193), 2), "D\u1EEF li\u1EC7u", TitledBorder.RIGHT, TitledBorder.TOP, null, null));
+		pnlChucNang1.add(pnlDuLieuLoc, BorderLayout.CENTER);
+		pnlDuLieuLoc.setLayout(new GridLayout(3, 2, 10, 10));
+		
+		JLabel lblTenTinhThanh = new JLabel("Tên tỉnh thành");
+		lblTenTinhThanh.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblTenTinhThanh.setHorizontalAlignment(SwingConstants.CENTER);
+		pnlDuLieuLoc.add(lblTenTinhThanh);
+		
+		cbTinhThanh = new JComboBox<String>();
+		lblTenTinhThanh.setLabelFor(cbTinhThanh);
+		pnlDuLieuLoc.add(cbTinhThanh);
+		
+		chkThanhVien1 = new JCheckBox("là thành viên");
+		chkThanhVien1.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		chkThanhVien1.setHorizontalAlignment(SwingConstants.CENTER);
+		pnlDuLieuLoc.add(chkThanhVien1);
+		
+		chckbxangHotng = new JCheckBox("Đang hoạt động");
+		chckbxangHotng.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		chckbxangHotng.setHorizontalAlignment(SwingConstants.CENTER);
+		pnlDuLieuLoc.add(chckbxangHotng);
+		
+		lblSort = new JLabel("Sort maKS");
+		lblSort.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		lblSort.setHorizontalAlignment(SwingConstants.CENTER);
+		pnlDuLieuLoc.add(lblSort);
+		
+		JPanel panel_1 = new JPanel();
+		pnlDuLieuLoc.add(panel_1);
+		
+		rdbtnGiam = new JRadioButton("Giảm");
+		rdbtnGiam.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		panel_1.add(rdbtnGiam);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(218, 112, 214));
+		contentPane.add(panel, BorderLayout.NORTH);
+		
+		JLabel lblTitle = new JLabel("Hệ thống quản lý");
+		lblTitle.setForeground(new Color(224, 255, 255));
+		lblTitle.setBackground(SystemColor.activeCaption);
+		lblTitle.setFont(new Font("Source Code Pro", Font.PLAIN, 28));
+		//xu ly su kien
+		panel.add(lblTitle);
 		table.addMouseListener(controller);
 		btnXoaRong.addActionListener(controller);
+		btnLoc.addActionListener(controller);
+		btnThem.addActionListener(controller);
+		btnSua.addActionListener(controller);
+		btnXoa.addActionListener(controller);
 		fillTable();
+		fillCb();
 	}
 	private void fillCb() {
 		String[] temp = controller.getDsTinhThanh();
 		for (String x : temp) {
 			cbMaTinhThanh.addItem(x);
+			cbTinhThanh.addItem(x);
 		}
 	}
 	private void fillTable() {
@@ -246,8 +341,6 @@ public class FrmQuanLyKhachSan extends JFrame {
 		chkbxDgHoatDong.setSelected((boolean) table.getValueAt(row, 5));
 		chkboxIsTV.setSelected((boolean) table.getValueAt(row, 6));
 	}
-
-
 }
 
 

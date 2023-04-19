@@ -39,9 +39,9 @@ import controller.LoginController;
 import java.awt.Toolkit;
 import javax.swing.JPasswordField;
 
-public class Login {
+public class Login  {
 
-	private JFrame frame;
+	public JFrame frame;
 	public PlaceholderTextField txtUser;
 	private LoginController controller;
 	public JPasswordField passwordField;
@@ -123,6 +123,7 @@ public class Login {
 		passwordField = new JPasswordField();
 		password.add(passwordField);
 		
+		
 		btnLogIn = new JButton("Log In");
 		btnLogIn.setIcon(new ImageIcon(Login.class.getResource("/view/img/login.png")));
 		btnLogIn.setFont(new Font("Arial Black", Font.BOLD, 16));
@@ -153,9 +154,13 @@ public class Login {
 		pnlRight.add(rigidArea);
 		controller = new LoginController(this);
 		btnLogIn.addActionListener(controller);
+		
+		txtUser.setText("abc");
+		passwordField.setText("123");
 	}
 	public void access() {
 		frame.setVisible(false);
+		
 	}
 	public void denied() {
 		JOptionPane.showMessageDialog(frame, "Mat Khau Sai");

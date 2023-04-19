@@ -87,4 +87,7 @@ public class TinhThanh {
 	public String getTenTinhThanh(String maTinh) {
 		return this.tenTinhThanh;
 	}
+	public int getMaTinhThanh(String tenTinhThanh) {
+		return Integer.parseInt(maTinhThanh);
+	}
 }

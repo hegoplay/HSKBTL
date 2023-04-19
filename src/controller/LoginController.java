@@ -12,6 +12,7 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 
 import connectDB.ConnectDB;
+import view.FrmQuanLyKhachSan;
 import view.Login;
 
 public class LoginController implements ActionListener{
@@ -40,7 +41,10 @@ public class LoginController implements ActionListener{
 				System.out.println(view.passwordField.getPassword());
 				Statement st = c.createStatement();
 				ResultSet r = st.executeQuery(sql);
-				if (r.next()) view.access();
+				if (r.next()) {
+					view.access();
+					new FrmQuanLyKhachSan().setVisible(true);
+				}
 				else view.denied();
 				c.close();
 				cbd.disconnect();

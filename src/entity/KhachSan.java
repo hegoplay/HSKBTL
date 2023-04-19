@@ -75,5 +75,12 @@ public class KhachSan {
 	public Object[] getObject() {
 		return new Object[] {maKS,tenKS, tenTinhThanh,diaChi,moTa,laThanhVien,conHoatDong};
 	}
+	public int getMaKS() {
+		return maKS;
+	}
+	public void setMaKS(int maKS) {
+		this.maKS = maKS;
+	}
+	
 }
 

@@ -54,5 +54,15 @@ public class DsTinhThanh implements ControllerTinhThanh {
 //		// TODO Auto-generated method stub
 //		
 //	}
+	@Override
+	public String getMaTinhThanh(String tenTinhThanh) {
+		// TODO Auto-generated method stub
+		for (int i = 0 ; i < ds.size();i++) {
+			if (tenTinhThanh.equals(ds.get(i).getTenTinhThanh())) {
+				return ds.get(i).getMaTinhThanh() ;
+			}
+		}
+		return null;
+	}
 	
 }

@@ -34,6 +34,27 @@ public class KhachSanController implements ControllerTinhThanh,ActionListener,Co
 		if (s.equals("Xoá Rỗng")) {
 			clearFill();
 		}
+		else if (s.equals("Lọc")) {
+			locTable((String)view.cbTinhThanh.getSelectedItem(), view.chkThanhVien1.isSelected(), view.chckbxangHotng.isSelected(), view.rdbtnGiam.isSelected());
+		}
+		else if (s.equals("Thêm")) {
+			addRow(getKSFromFill());
+			fillTable();
+			clearFill();
+		}
+		else if (s.equals("Sửa")) {
+			KhachSan temp = getKSFromFill();
+			temp.setMaKS((int)((DefaultTableModel)view.table.getModel()).getValueAt((int)view.table.getSelectedRow(), 0));
+			fixRow(temp);
+			fillTable();
+		}
+		else if (s.equals("Xóa")) {
+			KhachSan temp = getKSFromFill();
+			temp.setMaKS((int)((DefaultTableModel)view.table.getModel()).getValueAt((int)view.table.getSelectedRow(), 0));
+			deleteRow(temp);
+			fillTable();
+			clearFill();
+		}
 	}
 
 	@Override
@@ -54,7 +75,9 @@ public class KhachSanController implements ControllerTinhThanh,ActionListener,Co
 	@Override
 	public void fillTable() {
 		// TODO Auto-generated method stub
+		model = new KhachSanModel();
 		ArrayList<KhachSan> ds = model.getDS();
+		((DefaultTableModel)view.table.getModel()).setRowCount(0);
 		for (KhachSan x : ds) {
 			((DefaultTableModel)view.table.getModel()).addRow(x.getObject());
 		}
@@ -107,5 +130,50 @@ public class KhachSanController implements ControllerTinhThanh,ActionListener,Co
 		view.cbMaTinhThanh.setSelectedIndex(0);
 		view.table.clearSelection();
 		
+	}
+
+
+	@Override
+	public void locTable(String tenTinhThanh, boolean isThanhVien, boolean dangHoatDong, boolean isGiam) {
+		// TODO Auto-generated method stub
+		model.locTable(tenTinhThanh, isThanhVien, dangHoatDong, isGiam);
+		ArrayList<KhachSan> dsKS =  model.getDSLoc();
+		((DefaultTableModel)view.tblLoc.getModel()).setRowCount(0);
+		for (KhachSan x : dsKS) {
+			
+			((DefaultTableModel)view.tblLoc.getModel()).addRow(x.getObject());
+		}
+	}
+
+
+	@Override
+	public String getMaTinhThanh(String tenTinhThanh) {
+		// TODO Auto-generated method stub
+		return dsTT.getMaTinhThanh(tenTinhThanh);
+	}
+
+
+	@Override
+	public void addRow(KhachSan temp) {
+		// TODO Auto-generated method stub
+		model.addRow(temp);
+	}
+	public KhachSan getKSFromFill() {
+		return new KhachSan(0,view.txtTenKS.getText(),(String)view.cbMaTinhThanh.getSelectedItem(),view.txtDiaChi.getText(),view.txtMoTa.getText(), view.chkboxIsTV.isSelected(),view.chkbxDgHoatDong.isSelected());
+	}
+
+
+	@Override
+	public void fixRow(KhachSan temp) {
+		// TODO Auto-generated method stub
+		model.fixRow(temp);
+		
+	}
+
+
+	@Override
+	public void deleteRow(KhachSan temp) {
+		// TODO Auto-generated method stub
+		model.deleteRow(temp);
 	}
 }
