@@ -54,7 +54,13 @@ public class KhachSanModel implements ControllerKhachSan {
 			cdb.connect();
 			Connection c = cdb.getConnection();
 			DsTinhThanh dsTT = new DsTinhThanh();
-			String sql = "Select * from KhachSan where maTinhThanh = '" + dsTT.getMaTinhThanh(tenTinhThanh) + "' and laThanhVien = '" + (isThanhVien ? "True" : "False")+"' and conHoatDong = '" + (dangHoatDong ? "True" : "False")+
+			String sql;
+			if (tenTinhThanh.equals("")) {
+				sql = "Select * from KhachSan where laThanhVien = '" + (isThanhVien ? "True" : "False")+"' and conHoatDong = '" + (dangHoatDong ? "True" : "False")+
+						"' order by maKhachSan " + (isGiam ? "desc" : "asc");
+			}
+			
+			else sql = "Select * from KhachSan where maTinhThanh = '" + dsTT.getMaTinhThanh(tenTinhThanh) + "' and laThanhVien = '" + (isThanhVien ? "True" : "False")+"' and conHoatDong = '" + (dangHoatDong ? "True" : "False")+
 					"' order by maKhachSan " + (isGiam ? "desc" : "asc");
 			Statement st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);

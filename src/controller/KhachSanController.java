@@ -49,11 +49,14 @@ public class KhachSanController implements ControllerTinhThanh,ActionListener,Co
 			fillTable();
 		}
 		else if (s.equals("Xóa")) {
-			KhachSan temp = getKSFromFill();
-			temp.setMaKS((int)((DefaultTableModel)view.table.getModel()).getValueAt((int)view.table.getSelectedRow(), 0));
-			deleteRow(temp);
-			fillTable();
-			clearFill();
+			if (view.table.getSelectedRow()!=-1) {
+				KhachSan temp = getKSFromFill();
+				temp.setMaKS((int)((DefaultTableModel)view.table.getModel()).getValueAt((int)view.table.getSelectedRow(), 0));
+				deleteRow(temp);
+				fillTable();
+				clearFill();
+			}
+			
 		}
 	}
 

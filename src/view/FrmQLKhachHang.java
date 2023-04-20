@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import component.KhachHangTable;
 import component.MainMenuBar;
 
 import javax.swing.ImageIcon;
@@ -75,21 +76,7 @@ public class FrmQLKhachHang extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		pnlTable.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"MaKH", "ho", "ten", "ngaySinh"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, String.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
+		table = new KhachHangTable();
 		scrollPane.setViewportView(table);
 		
 		JPanel panel_1 = new JPanel();

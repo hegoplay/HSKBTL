@@ -38,7 +38,6 @@ public class LoginController implements ActionListener{
 			Connection c = cbd.getConnection();
 			String sql = "Select * from userAccess where userName = '" + view.txtUser.getText() + "' and pass = '" + String.valueOf(view.passwordField.getPassword())+ "'  ";
 			try {
-				System.out.println(view.passwordField.getPassword());
 				Statement st = c.createStatement();
 				ResultSet r = st.executeQuery(sql);
 				if (r.next()) {

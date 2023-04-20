@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JCheckBox;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -28,6 +29,8 @@ import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -108,7 +111,7 @@ public class FrmQuanLyKhachSan extends JFrame {
 		
 		JPanel pnlTitle = new JPanel();
 		pnlTitle.setBorder(new TitledBorder(new LineBorder(new Color(238, 130, 238), 1, true), "Ch\u1EE9c n\u0103ng", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(221, 160, 221)));
-		pnlThemXoaSua.add(pnlTitle, BorderLayout.SOUTH);
+		pnlThemXoaSua.add(pnlTitle, BorderLayout.NORTH);
 		pnlTitle.setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnlValues = new JPanel();
@@ -184,6 +187,8 @@ public class FrmQuanLyKhachSan extends JFrame {
 		
 		JPanel pnlChucNang = new JPanel();
 		pnlTitle.add(pnlChucNang, BorderLayout.SOUTH);
+		
+//		pnlChucNang.add(Box.createRigidArea(new Dimension(500, 50)) );
 		
 		JButton btnThem = new JButton("Thêm");
 		btnThem.setSelectedIcon(new ImageIcon(FrmQuanLyKhachSan.class.getResource("/view/img/add.png")));
@@ -324,6 +329,7 @@ public class FrmQuanLyKhachSan extends JFrame {
 	}
 	private void fillCb() {
 		String[] temp = controller.getDsTinhThanh();
+		cbTinhThanh.addItem("");
 		for (String x : temp) {
 			cbMaTinhThanh.addItem(x);
 			cbTinhThanh.addItem(x);

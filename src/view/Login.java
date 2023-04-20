@@ -27,12 +27,6 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
 import java.awt.Component;
-import java.awt.FlowLayout;
-import javax.swing.SpringLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
 
 import controller.LoginController;
 
