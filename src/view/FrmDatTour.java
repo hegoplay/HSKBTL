@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import component.KhachHangTable;
 import component.MainMenuBar;
+import controller.DatTourController;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,15 +24,21 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.JComboBox;
 
 public class FrmDatTour extends JFrame {
 
 	private JPanel contentPane;
-	private JTable tblKhachHang;
-	private JTextField txtHo;
-	private JTextField txtTen;
-	private JTextField txtSDT;
-	private JTextField txtEmail;
+	public JTable tblKhachHang;
+	public JTextField txtHo;
+	public JTextField txtTen;
+	public JTextField txtSDT;
+	public JTextField txtEmail;
+	public JComboBox<String> cbTinhThanh;
+	public DatTourController controller;
+	public TableRowSorter<DefaultTableModel> sorter;
 
 	/**
 	 * Launch the application.
@@ -127,8 +134,14 @@ public class FrmDatTour extends JFrame {
 		pnlEmail.add(txtEmail);
 		txtEmail.setColumns(20);
 		
-		JLabel lblTemp = new JLabel("");
-		pnlFieldSort.add(lblTemp);
+		JPanel panel = new JPanel();
+		pnlFieldSort.add(panel);
+		
+		JLabel lblTinhThanh = new JLabel("Tỉnh");
+		panel.add(lblTinhThanh);
+		
+		cbTinhThanh = new JComboBox<String>();
+		panel.add(cbTinhThanh);
 		
 		JPanel pnlChucNang = new JPanel();
 		pnlFieldSort.add(pnlChucNang);
@@ -145,6 +158,11 @@ public class FrmDatTour extends JFrame {
 		
 		tblKhachHang = new KhachHangTable();
 		paneKH.setViewportView(tblKhachHang);
+		
+		
+		controller = new DatTourController(this);
+		sorter = new TableRowSorter<DefaultTableModel>((DefaultTableModel) tblKhachHang.getModel());
+		controller.fillCb();
 	}
-
+	
 }

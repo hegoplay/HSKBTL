@@ -344,8 +344,8 @@ public class FrmQuanLyKhachSan extends JFrame {
 		txtDiaChi.setText((String) table.getValueAt(row, 3));
 		cbMaTinhThanh.setSelectedItem((String) table.getValueAt(row, 2));
 		txtMoTa.setText((String) table.getValueAt(row, 4));
-		chkbxDgHoatDong.setSelected((boolean) table.getValueAt(row, 5));
-		chkboxIsTV.setSelected((boolean) table.getValueAt(row, 6));
+		chkbxDgHoatDong.setSelected((Boolean) table.getValueAt(row, 5));
+		chkboxIsTV.setSelected((Boolean) table.getValueAt(row, 6));
 	}
 }
 

@@ -13,6 +13,7 @@ import javax.swing.JSeparator;
 import view.FrmQLKhachHang;
 import view.FrmQuanLyKhachSan;
 import view.Login;
+import view.FrmTrangChu;
 
 public class MainMenuBar extends JMenuBar implements ActionListener{
 	private JMenuItem mntmTrangChu;
@@ -71,6 +72,7 @@ public class MainMenuBar extends JMenuBar implements ActionListener{
 		mntmAboutUs = new JMenuItem("About us");
 		mntmAboutUs.setIcon(new ImageIcon(FrmQuanLyKhachSan.class.getResource("/view/img/question.png")));
 		mnHelp.add(mntmAboutUs);
+		mntmTrangChu.addActionListener(this);
 		mntmKhachSan.addActionListener(this);
 		mntmQLKhachHang.addActionListener(this);
 		mntmExit.addActionListener(this);
@@ -83,6 +85,10 @@ public class MainMenuBar extends JMenuBar implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Object o = e.getSource();
+		if (o.equals(mntmTrangChu)) {
+			frame.setVisible(false);
+			new FrmTrangChu().frmTourDuLch.setVisible(true);
+		}
 		if (o.equals(mntmKhachSan)) {
 			frame.setVisible(false);
 			new FrmQuanLyKhachSan().setVisible(true);
@@ -95,7 +101,7 @@ public class MainMenuBar extends JMenuBar implements ActionListener{
 			System.exit(0);
 		}
 		if (o.equals(mntmDangXuat)) {
-			frame.setVisible(false);
+			frame.setVisible(true);
 			new Login().frame.setVisible(true);
 		}
 	}

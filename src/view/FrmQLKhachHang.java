@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 import component.KhachHangTable;
 import component.MainMenuBar;
+import entity.KhachHang;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,11 +27,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JTabbedPane;
+import javax.swing.BoxLayout;
+import javax.swing.JTextField;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
-public class FrmQLKhachHang extends JFrame {
+public class FrmQLKhachHang extends JFrame{
 
 	private JPanel contentPane;
 	private JTable table;
+	private JTextField txtho;
+	private JTextField txtten;
+	private JTextField txtdiachi;
+	private JTextField txtemail;
+	private JButton btnThem;
+	private JButton btnXoa;
+	private JButton btnSua;
 
 	/**
 	 * Launch the application.
@@ -71,25 +83,72 @@ public class FrmQLKhachHang extends JFrame {
 		
 		JPanel pnlTable = new JPanel();
 		tabbedPane.addTab("Danh sách bảng", null, pnlTable, null);
-		pnlTable.setLayout(new BorderLayout(0, 0));
+		pnlTable.setLayout(null);
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
-		pnlTable.add(scrollPane, BorderLayout.CENTER);
+		scrollPane.setBounds(0, 122, 971, 339);
+		pnlTable.add(scrollPane);
 		
 		table = new KhachHangTable();
 		scrollPane.setViewportView(table);
 		
-		JPanel panel_1 = new JPanel();
-		pnlTable.add(panel_1, BorderLayout.SOUTH);
+		JPanel pnlFiled = new JPanel();
+		pnlFiled.setBounds(0, 0, 971, 83);
+		pnlTable.add(pnlFiled);
+		pnlFiled.setLayout(null);
 		
-		JButton btnThem = new JButton("Them");
-		panel_1.add(btnThem);
+		JLabel lblho = new JLabel("ho");
+		lblho.setHorizontalAlignment(SwingConstants.LEFT);
+		lblho.setBounds(10, 10, 45, 13);
+		pnlFiled.add(lblho);
 		
-		JButton btnXoa = new JButton("Xoa");
-		panel_1.add(btnXoa);
+		txtho = new JTextField();
+		txtho.setBounds(60, 7, 435, 19);
+		pnlFiled.add(txtho);
+		txtho.setColumns(10);
 		
-		JButton btnSua = new JButton("Sua");
-		panel_1.add(btnSua);
+		JLabel lblNewLabel = new JLabel("Ten");
+		lblNewLabel.setBounds(505, 10, 45, 13);
+		pnlFiled.add(lblNewLabel);
+		
+		txtten = new JTextField();
+		txtten.setBounds(531, 7, 409, 19);
+		pnlFiled.add(txtten);
+		txtten.setColumns(10);
+		
+		JLabel lbldiachi = new JLabel("diachi");
+		lbldiachi.setHorizontalAlignment(SwingConstants.LEFT);
+		lbldiachi.setBounds(10, 33, 45, 13);
+		pnlFiled.add(lbldiachi);
+		
+		txtdiachi = new JTextField();
+		txtdiachi.setBounds(60, 30, 880, 19);
+		pnlFiled.add(txtdiachi);
+		txtdiachi.setColumns(10);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setHorizontalAlignment(SwingConstants.LEFT);
+		lblEmail.setBounds(10, 56, 45, 13);
+		pnlFiled.add(lblEmail);
+		
+		txtemail = new JTextField();
+		txtemail.setBounds(60, 53, 880, 19);
+		pnlFiled.add(txtemail);
+		txtemail.setColumns(10);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 81, 971, 31);
+		pnlTable.add(panel);
+		
+		btnThem = new JButton("Them");
+		panel.add(btnThem);
+		
+		btnXoa = new JButton("Xoa");
+		panel.add(btnXoa);
+		
+		btnSua = new JButton("Sua");
+		panel.add(btnSua);
 		
 		JPanel pnlTitle = new JPanel();
 		pnlTitle.setBackground(new Color(218, 112, 214));
@@ -100,7 +159,7 @@ public class FrmQLKhachHang extends JFrame {
 		lblTitle.setFont(new Font("Source Code Pro", Font.PLAIN, 28));
 		lblTitle.setBackground(SystemColor.activeCaption);
 		pnlTitle.add(lblTitle);
-		
+	
 		
 	}
 

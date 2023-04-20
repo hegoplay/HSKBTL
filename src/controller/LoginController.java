@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 
 import connectDB.ConnectDB;
 import view.FrmQuanLyKhachSan;
+import view.FrmTrangChu;
 import view.Login;
 
 public class LoginController implements ActionListener{
@@ -42,7 +43,7 @@ public class LoginController implements ActionListener{
 				ResultSet r = st.executeQuery(sql);
 				if (r.next()) {
 					view.access();
-					new FrmQuanLyKhachSan().setVisible(true);
+					new FrmTrangChu().frmTourDuLch.setVisible(true);
 				}
 				else view.denied();
 				c.close();
