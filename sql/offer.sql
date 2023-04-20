@@ -1,53 +1,32 @@
-go
-create table HopDong(
-	id int identity(1,1) primary key,
-	maHopDong nvarchar(10) unique,
-	maNV varchar(7),
-	maKH varchar(7),
-	maTour varchar(8),
-	ngayDk date,
-	ngayGiaoDich date,
-	daTra bit,
-	tgTra Datetime,
-	giaHopDong money,
-	hoanTien bit,
-	tgHoanTien datetime,
-	soTienHoan money
-)
-alter table HopDong add constraint maNV_HopDong_fkey foreign key (maNV) references NhanVien(maNV)
-alter table HopDong add constraint maKH_HopDong_fkey foreign key (maKH) references KhachHang(maKH)
-
 
 go
-
 create table Tour(
-	id int identity(1,1) primary key,
-	maTour varchar(8),
+	maTour varchar(8) primary key,
 	tenGD nvarchar(50),
 	tgTaoTour DateTime,
 	tgBatDau datetime,
 	tgKetThuc datetime,
-	soLuong int,
-	maKH varchar(7),
-	maNV varchar(7)
 );
-
-alter table Tour add constraint maNV_HopDong_fkey foreign key (maNV) references NhanVien(maNV)
-alter table Tour add constraint maKH_HopDong_fkey foreign key (maKH) references KhachHang(maKH)
-
+create table KHTour(
+	maTour varchar(8),
+	maKH varchar(7)
+	primary key (maTour,maKH)
+)
+alter table KHTour add constraint maTour_Tour_fkey foreign key (maTour) references Tour(maTour)
+alter table KHTour add constraint maKH_KhachHang_fkey foreign key (maKH) references KhachHang(maKH)
 go
 
-create table TourPhongKhachSan(
-	id int identity (1,1) primary key,
+create table TourKhachSan(
+	maKS int primary key,
 	maTour varchar(8) ,
-	maKS int,
+	
 	giamGia float,
 	moTa text
 	unique (maTour,maKS)
 )
-alter table TourPhongKhachSan add constraint maKS_TourPhongKhachSan_pkey foreign key (maKS) references KhachSan(maKhachSan)
+alter table TourKhachSan add constraint maTour_TourPhongKhachSan_pkey foreign key (maTour) references Tour(maTour)
 go
-create table VePhuongTIen(
+create table VePhuongTien(
 	maDiChuyen int identity(1,1) primary key,
 	maTour varchar(8),
 	maVe int,
@@ -56,4 +35,4 @@ create table VePhuongTIen(
 	moTa text,
 	unique(maTour,maVe)
 )
-alter table VePhuongTien add constraint maPT_VePhuongTien foreign key (maVe) references VeDiChuyen(maVe)
+alter table VePhuongTien add constraint maPT_VePhuongTien foreign key (maTour) references Tour(maTour)

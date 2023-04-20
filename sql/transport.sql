@@ -2,7 +2,7 @@
 use QLDuLich
 
 create table LoaiVe (
-	maLoaiVe int identity(1,1) primary key,
+	maLoaiVe int primary key,
 	tenLoaiVe nvarchar(20)
 )
 
@@ -28,6 +28,7 @@ create table CongTyPhuongTien (
 
 alter table CongTyPhuongTien add constraint maTinhThanh_CTPT_fkey foreign key (maTinhThanh) references TinhThanh(maTinhThanh) on delete cascade
 alter table CongTyPhuongTien add constraint maLoaiPhuongTien_CTPT_fkey foreign key (maLoaiPhuongTien) references LoaiPhuongTien(maLoai)
+--alter table CongTyPhuongTien drop constraint maLoaiPhuongTien_CTPT_fkey
 
 go
 use QLDuLich
@@ -44,4 +45,5 @@ create table VeDiChuyen(
 alter table VeDiChuyen add constraint maTinhDiemDi_VDC_fkey foreign key (maTinhDiemDi) references TinhThanh(maTinhThanh) on delete cascade
 alter table VeDiChuyen add constraint maTinhDiemDen_VDC_fkey foreign key (maTinhDiemDen) references TinhThanh(maTinhThanh)
 alter table VeDiChuyen add constraint maLoaiVe_VDC_fkey foreign key (maLoaiVe) references LoaiVe(maLoaiVe)
+--alter table VeDiChuyen drop constraint maLoaiVe_VDC_fkey
 alter table VeDiChuyen add constraint maCongTy_VDC_fkey foreign key (maCongTy) references CongTyPhuongTien(maCongTy)
