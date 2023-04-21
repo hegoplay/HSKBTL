@@ -2,16 +2,18 @@
 go
 create table Tour(
 	maTour varchar(8) primary key,
-	tenGD nvarchar(50),
-	tgTaoTour DateTime,
+	tenTour nvarchar(50),
 	tgBatDau datetime,
 	tgKetThuc datetime,
+	maTPDiemDi nvarchar(20),
+	maTPDiemDen nvarchar(20)
 );
 create table KHTour(
 	maTour varchar(8),
 	maKH varchar(7)
 	primary key (maTour,maKH)
 )
+alter table KHTour drop constraint maKH_KhachHang_fkey
 alter table KHTour add constraint maTour_Tour_fkey foreign key (maTour) references Tour(maTour)
 alter table KHTour add constraint maKH_KhachHang_fkey foreign key (maKH) references KhachHang(maKH)
 go

@@ -47,3 +47,5 @@ alter table VeDiChuyen add constraint maTinhDiemDen_VDC_fkey foreign key (maTinh
 alter table VeDiChuyen add constraint maLoaiVe_VDC_fkey foreign key (maLoaiVe) references LoaiVe(maLoaiVe)
 --alter table VeDiChuyen drop constraint maLoaiVe_VDC_fkey
 alter table VeDiChuyen add constraint maCongTy_VDC_fkey foreign key (maCongTy) references CongTyPhuongTien(maCongTy)
+
+Select tenCongTy from CongTyPhuongTien
