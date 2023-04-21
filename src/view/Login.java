@@ -10,7 +10,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import test.PlaceholderTextField;
+import component.PlaceholderTextField;
 
 import javax.swing.JPanel;
 import java.awt.Font;

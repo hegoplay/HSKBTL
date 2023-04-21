@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class KhachHang {
 	private String maKH,ho,ten,diaChi;
-	private int SDT;
+	private String SDT;
 	private String email;
 	private LocalDate ngayDk;
 	
@@ -32,7 +32,7 @@ public class KhachHang {
 		super();
 		this.maKH = maKH;
 	}
-	public KhachHang(String maKH, String ho, String ten, String diaChi, int sDT, String email, LocalDate ngayDk) {
+	public KhachHang(String maKH, String ho, String ten, String diaChi, String sDT, String email, LocalDate ngayDk) {
 		super();
 		this.setMaKH(maKH);
 		this.setHo(ho);
@@ -66,10 +66,10 @@ public class KhachHang {
 	public void setMaKH(String maKH) {
 		this.maKH = maKH;
 	}
-	public int getSDT() {
+	public String getSDT() {
 		return SDT;
 	}
-	public void setSDT(int sDT) {
+	public void setSDT(String sDT) {
 		SDT = sDT;
 	}
 	public String getEmail() {
@@ -87,4 +87,8 @@ public class KhachHang {
 	public String getHoTen() {
 		return ho + " " + ten;
 	}
+	public Object[] getObject(){
+		return new Object[] {maKH,ho,ten,diaChi,SDT,email,ngayDk};
+	}
+
 }

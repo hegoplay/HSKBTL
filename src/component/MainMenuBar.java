@@ -10,8 +10,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
+import view.FrmDatTour;
 import view.FrmQLKhachHang;
+import view.FrmQLVePhuongTien;
 import view.FrmQuanLyKhachSan;
+import view.FrmQuanLyTour;
 import view.Login;
 import view.FrmTrangChu;
 
@@ -25,6 +28,7 @@ public class MainMenuBar extends JMenuBar implements ActionListener{
 	private JFrame frame;
 	private JMenuItem mntmExit;
 	private JMenuItem mntmDangXuat;
+	private JMenuItem mntmQLTour;
 	public MainMenuBar(JFrame frame) {
 		
 		this.frame = frame;
@@ -66,6 +70,10 @@ public class MainMenuBar extends JMenuBar implements ActionListener{
 		mntmQLChuyenBay.setIcon(new ImageIcon(FrmQuanLyKhachSan.class.getResource("/view/img/airplane.png")));
 		mnQuanLy.add(mntmQLChuyenBay);
 		
+		mntmQLTour = new JMenuItem("Tour");
+		mntmQLTour.setIcon(new ImageIcon(FrmQuanLyKhachSan.class.getResource("/view/img/tour.png")));
+		mnQuanLy.add(mntmQLTour);
+		
 		JMenu mnHelp = new JMenu("Help"); 
 		this.add(mnHelp);
 		
@@ -77,6 +85,9 @@ public class MainMenuBar extends JMenuBar implements ActionListener{
 		mntmQLKhachHang.addActionListener(this);
 		mntmExit.addActionListener(this);
 		mntmDangXuat.addActionListener(this);
+		mntmQLChuyenBay.addActionListener(this);
+		mntmDatTour.addActionListener(this);
+		mntmQLTour.addActionListener(this);
 	}
 	public JMenuBar getInstance() {
 		return this;
@@ -101,8 +112,20 @@ public class MainMenuBar extends JMenuBar implements ActionListener{
 			System.exit(0);
 		}
 		if (o.equals(mntmDangXuat)) {
-			frame.setVisible(true);
+			frame.setVisible(false);
 			new Login().frame.setVisible(true);
+		}
+		if (o.equals(mntmQLChuyenBay)) {
+			frame.setVisible(false);
+			new FrmQLVePhuongTien().frame.setVisible(true);
+		}
+		if (o.equals(mntmDatTour)) {
+			frame.setVisible(false);
+			new FrmDatTour().setVisible(true);
+		}
+		if (o.equals(mntmQLTour)) {
+			frame.setVisible(false);
+			new FrmQuanLyTour().setVisible(false);
 		}
 	}
 }

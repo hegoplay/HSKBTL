@@ -54,13 +54,14 @@ public class FrmTrangChu {
 		frmTourDuLch.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(138, 43, 226));
+		panel.setBackground(new Color(221, 160, 221));
 		frmTourDuLch.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JLabel lblNewLabel = new JLabel("Trang Chủ  Tour Du lịch");
+		JLabel lblNewLabel = new JLabel("Trang Chủ Tour Du lịch");
+		lblNewLabel.setForeground(new Color(255, 250, 240));
 		lblNewLabel.setBackground(new Color(123, 104, 238));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setFont(new Font("Source Code Pro", Font.BOLD, 18));
 		panel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("");

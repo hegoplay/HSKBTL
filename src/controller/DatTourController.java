@@ -4,17 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
 
+import entity.KhachHang;
 import model.DsTinhThanh;
+import model.KhachHangModel;
 import view.FrmDatTour;
 
 public class DatTourController implements ActionListener {
 	FrmDatTour frm;
 	DsTinhThanh dsTT;
+	KhachHangModel khModel;
 	public DatTourController(FrmDatTour frm) {
 		// TODO Auto-generated constructor stub
 		this.frm = frm;
 		dsTT = new DsTinhThanh();
+		khModel = new KhachHangModel();
 	}
 	public void fillCb() {
 		String ds[] = dsTT.getDsTinhThanh();
@@ -25,36 +30,20 @@ public class DatTourController implements ActionListener {
 		}
 	}
 	public void fillTable() {
-		
+		((DefaultTableModel)frm.tblKhachHang.getModel()).setRowCount(0);
+		for (KhachHang s : khModel.getDs()) {
+			((DefaultTableModel)frm.tblKhachHang.getModel()).addRow(s.getObject());
+		}
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String src = e.getActionCommand();
 		if (src.equals("Lọc")) {
-			frm.sorter.setRowFilter(new RowFilter<Object, Object>() {
-
-				@Override
-				public boolean include(Entry entry) {
-					// TODO Auto-generated method stub
-					String Fname  = entry.getValue(0).toString();
-					String search0 = frm.txtHo.getText();
-					String Lname  = entry.getValue(1).toString();
-					String search1 = frm.txtTen.getText();
-					String SDT  = entry.getValue(2).toString();
-					String search2 = frm.txtSDT.getText();
-					String email  = entry.getValue(3).toString();
-					String search3 = frm.txtEmail.getText();
-					String tinhThanh = entry.getValue(4).toString();
-					String search4 = (String) frm.cbTinhThanh.getSelectedItem();
-					return Fname.startsWith(search0) && Lname.startsWith(search1)&&SDT.startsWith(search2) && email.startsWith(search3)&&tinhThanh.startsWith(search4);
-//					if (entry.getStringValue(i).startsWith("a")) {
-//				         // The value starts with "a", include it
-//				         return true;
-//				       }
-				}
-				
-			});
+			((DefaultTableModel)frm.tblKhachHang.getModel()).setRowCount(0);
+			for (KhachHang s : khModel.filterDs(frm.txtHo.getText(), frm.txtTen.getText(), frm.txtEmail.getText(), frm.txtSDT.getText())) {
+				((DefaultTableModel)frm.tblKhachHang.getModel()).addRow(s.getObject());
+			}
 		}
 	}
 	

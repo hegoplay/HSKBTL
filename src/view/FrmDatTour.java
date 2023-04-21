@@ -20,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.RowFilter.Entry;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,15 +32,20 @@ import javax.swing.JComboBox;
 
 public class FrmDatTour extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	public JTable tblKhachHang;
+	public KhachHangTable tblKhachHang;
 	public JTextField txtHo;
 	public JTextField txtTen;
 	public JTextField txtSDT;
 	public JTextField txtEmail;
 	public JComboBox<String> cbTinhThanh;
 	public DatTourController controller;
-	public TableRowSorter<DefaultTableModel> sorter;
+	private JButton btnLoc;
+	private JButton btnChon;
 
 	/**
 	 * Launch the application.
@@ -61,7 +68,8 @@ public class FrmDatTour extends JFrame {
 	 */
 	public FrmDatTour() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setSize(1000,600);
+		setLocationRelativeTo(null); 
 		setTitle("Đặt tour");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -87,7 +95,7 @@ public class FrmDatTour extends JFrame {
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
 		JPanel pnlKhachHang = new JPanel();
-		tabbedPane.addTab("New tab", null, pnlKhachHang, null);
+		tabbedPane.addTab("Khách Hàng", null, pnlKhachHang, null);
 		pnlKhachHang.setLayout(new BorderLayout(0, 0));
 		
 		JPanel pnlFieldSort = new JPanel();
@@ -146,23 +154,36 @@ public class FrmDatTour extends JFrame {
 		JPanel pnlChucNang = new JPanel();
 		pnlFieldSort.add(pnlChucNang);
 		
-		JButton btnLoc = new JButton("Lọc");
-		btnLoc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnLoc = new JButton("Lọc");
+		
 		pnlChucNang.add(btnLoc);
 		
-		JScrollPane paneKH = new JScrollPane();
-		pnlKhachHang.add(paneKH, BorderLayout.CENTER);
+		btnChon = new JButton("Chọn");
+		pnlChucNang.add(btnChon);
 		
 		tblKhachHang = new KhachHangTable();
-		paneKH.setViewportView(tblKhachHang);
+		
+		JScrollPane paneKH = new JScrollPane(tblKhachHang);
+		pnlKhachHang.add(paneKH, BorderLayout.CENTER);
+		
+		JPanel pnlKhachSan = new JPanel();
+		tabbedPane.addTab("New tab", null, pnlKhachSan, null);
+		pnlKhachSan.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_1 = new JPanel();
+		pnlKhachSan.add(panel_1, BorderLayout.NORTH);
+		
+		
+
 		
 		
 		controller = new DatTourController(this);
-		sorter = new TableRowSorter<DefaultTableModel>((DefaultTableModel) tblKhachHang.getModel());
 		controller.fillCb();
+		controller.fillTable();
+
+		
+		btnLoc.addActionListener(controller);
+		btnChon.addActionListener(controller);
 	}
 	
 }

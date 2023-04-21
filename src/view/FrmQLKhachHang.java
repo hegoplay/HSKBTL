@@ -1,4 +1,4 @@
-package view;
+ package view;
 
 import java.awt.EventQueue;
 
@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 import component.KhachHangTable;
 import component.MainMenuBar;
+import controller.KhachHangController;
 import entity.KhachHang;
 
 import javax.swing.ImageIcon;
@@ -36,14 +37,15 @@ public class FrmQLKhachHang extends JFrame{
 
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField txtho;
-	private JTextField txtten;
-	private JTextField txtdiachi;
-	private JTextField txtemail;
+	public JTextField txtHo;
+	public JTextField txtTen;
+	public JTextField txtDiachi;
+	public JTextField txtemail;
 	private JButton btnThem;
 	private JButton btnXoa;
 	private JButton btnSua;
-
+	public JTextField txtSDT;
+	private KhachHangController controller;
 	/**
 	 * Launch the application.
 	 */
@@ -103,29 +105,29 @@ public class FrmQLKhachHang extends JFrame{
 		lblho.setBounds(10, 10, 45, 13);
 		pnlFiled.add(lblho);
 		
-		txtho = new JTextField();
-		txtho.setBounds(60, 7, 435, 19);
-		pnlFiled.add(txtho);
-		txtho.setColumns(10);
+		txtHo = new JTextField();
+		txtHo.setBounds(60, 7, 435, 19);
+		pnlFiled.add(txtHo);
+		txtHo.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Ten");
 		lblNewLabel.setBounds(505, 10, 45, 13);
 		pnlFiled.add(lblNewLabel);
 		
-		txtten = new JTextField();
-		txtten.setBounds(531, 7, 409, 19);
-		pnlFiled.add(txtten);
-		txtten.setColumns(10);
+		txtTen = new JTextField();
+		txtTen.setBounds(531, 7, 409, 19);
+		pnlFiled.add(txtTen);
+		txtTen.setColumns(10);
 		
 		JLabel lbldiachi = new JLabel("diachi");
 		lbldiachi.setHorizontalAlignment(SwingConstants.LEFT);
 		lbldiachi.setBounds(10, 33, 45, 13);
 		pnlFiled.add(lbldiachi);
 		
-		txtdiachi = new JTextField();
-		txtdiachi.setBounds(60, 30, 880, 19);
-		pnlFiled.add(txtdiachi);
-		txtdiachi.setColumns(10);
+		txtDiachi = new JTextField();
+		txtDiachi.setBounds(60, 30, 435, 19);
+		pnlFiled.add(txtDiachi);
+		txtDiachi.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setHorizontalAlignment(SwingConstants.LEFT);
@@ -137,11 +139,20 @@ public class FrmQLKhachHang extends JFrame{
 		pnlFiled.add(txtemail);
 		txtemail.setColumns(10);
 		
+		txtSDT = new JTextField();
+		txtSDT.setBounds(531, 29, 409, 20);
+		pnlFiled.add(txtSDT);
+		txtSDT.setColumns(10);
+		
+		JLabel lblSDT = new JLabel("SDT");
+		lblSDT.setBounds(505, 32, 46, 14);
+		pnlFiled.add(lblSDT);
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 81, 971, 31);
 		pnlTable.add(panel);
 		
-		btnThem = new JButton("Them");
+		btnThem = new JButton("Thêm");
 		panel.add(btnThem);
 		
 		btnXoa = new JButton("Xoa");
@@ -159,8 +170,9 @@ public class FrmQLKhachHang extends JFrame{
 		lblTitle.setFont(new Font("Source Code Pro", Font.PLAIN, 28));
 		lblTitle.setBackground(SystemColor.activeCaption);
 		pnlTitle.add(lblTitle);
-	
+		
+		controller = new KhachHangController(this);
+		btnThem.addActionListener(controller);
 		
 	}
-
 }

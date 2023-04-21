@@ -82,5 +82,6 @@ public class KhachSan {
 		this.maKS = maKS;
 	}
 	
+	
 }
 

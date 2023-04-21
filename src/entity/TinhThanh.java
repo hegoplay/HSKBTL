@@ -90,4 +90,13 @@ public class TinhThanh {
 	public int getMaTinhThanh(String tenTinhThanh) {
 		return Integer.parseInt(maTinhThanh);
 	}
+	public String get2TenTinhThanh() {
+		String ans = "";
+		for (int i = 0 ; i < tenTinhThanh_en.length();i++) {
+			if (tenTinhThanh_en.charAt(i)>='A' && tenTinhThanh_en.charAt(i)<='Z') {
+				ans+=tenTinhThanh_en.charAt(i);
+			}
+		}
+		return ans;
+	}
 }
