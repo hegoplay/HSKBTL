@@ -10,6 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
+import view.AboutUs;
 import view.FrmDatTour;
 import view.FrmQLKhachHang;
 import view.FrmQLVePhuongTien;
@@ -88,6 +89,7 @@ public class MainMenuBar extends JMenuBar implements ActionListener{
 		mntmQLChuyenBay.addActionListener(this);
 		mntmDatTour.addActionListener(this);
 		mntmQLTour.addActionListener(this);
+		mntmAboutUs.addActionListener(this);
 	}
 	public JMenuBar getInstance() {
 		return this;
@@ -126,6 +128,9 @@ public class MainMenuBar extends JMenuBar implements ActionListener{
 		if (o.equals(mntmQLTour)) {
 			frame.setVisible(false);
 			new FrmQuanLyTour().setVisible(true);
+		}
+		if (o.equals(mntmAboutUs)) {
+			new AboutUs();
 		}
 	}
 }

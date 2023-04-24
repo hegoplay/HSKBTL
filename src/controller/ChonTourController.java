@@ -4,9 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import connectDB.ConnectDB;
 import entity.Tour;
 import model.TourModel;
 import view.FrmDatTour;
@@ -65,9 +70,36 @@ public class ChonTourController implements MouseListener,ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String src = e.getActionCommand();
-		if (src.equals("Chọn tour")) {
-			int row
+		if (src.equals("Chọn Tour")) {
+			int row = view.table.getSelectedRow();
+			if (row >=0 && !view.txtMaKH.equals(" ")) {
+
+				insertDB();
+			
+			}
 		}
 	}
-
+	public Tour getTour() {
+		int row = view.table.getSelectedRow();
+		return model.getDs().get(row);
+	}
+	private void insertDB() {
+		ConnectDB cdb = ConnectDB.getInstance();
+		try {
+			cdb.connect();
+			Connection c = cdb.getConnection();
+		
+			String sql = "insert into KHTour(maTour,maKH) values (?,?)";
+			PreparedStatement st = c.prepareStatement(sql);
+			st.setString(1,view.txtMaTour.getText());
+			st.setString(2, view.txtMaKH.getText());
+			int n = st.executeUpdate();
+			cdb.disconnect();
+			JOptionPane.showMessageDialog(view, "Dat tour thanh Cong");
+		} 
+		catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 }

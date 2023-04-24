@@ -6,12 +6,15 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import component.TourTable;
 import controller.ChonTourController;
+import controller.DatTourController;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 public class PnlChonTour extends JPanel {
 	public JTextField txtMaKH;
@@ -22,7 +25,7 @@ public class PnlChonTour extends JPanel {
 	public JTextField txtEmail;
 	public JTextField txtMaTour;
 	public JTextField txtTenTour;
-	private ChonTourController controller;
+	public ChonTourController controller;
 	public TourTable table;
 	public FrmDatTour frm;
 	/**
@@ -160,6 +163,7 @@ public class PnlChonTour extends JPanel {
 		
 		controller.fillTable();
 		table.addMouseListener(controller);
+		btnChonTour.addActionListener(controller);
 	}
 
 }

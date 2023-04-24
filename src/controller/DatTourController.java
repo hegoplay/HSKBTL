@@ -2,10 +2,15 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 
+import connectDB.ConnectDB;
 import entity.KhachHang;
 import entity.Tour;
 import entity.VePhuongTien;
@@ -21,8 +26,8 @@ public class DatTourController implements ActionListener {
 	KhachHangModel khModel;
 	PnlChonTour viewChonTour;
 	PnlDatVe viewDatVe;
-	KhachHang kh;
-	Tour tour;
+	public KhachHang kh;
+	public Tour tour;
 	VePhuongTien ve;
 	public DatTourController(FrmDatTour view) {
 		// TODO Auto-generated constructor stub
@@ -70,12 +75,21 @@ public class DatTourController implements ActionListener {
 				viewChonTour.txtDiaChi.setText((String)((DefaultTableModel)view.tblKhachHang.getModel()).getValueAt(row, 3));
 				viewChonTour.txtSDT.setText((String)((DefaultTableModel)view.tblKhachHang.getModel()).getValueAt(row, 4));
 				viewChonTour.txtEmail.setText((String)((DefaultTableModel)view.tblKhachHang.getModel()).getValueAt(row, 5));
+				
+				kh = khModel.getDs().get(row);
+				
 			}
 			
 		}
-		if (src.equals("Chọn Tour")) {
+		if (src.equals("Chọn tour")) {
+			int row = viewChonTour.table.getSelectedRow();
+			if (row >=0 && !viewChonTour.txtMaKH.equals(" ")) {
+				
+			tour = viewChonTour.controller.getTour();
 			
+			}
 		}
 	}
+	
 	
 }
