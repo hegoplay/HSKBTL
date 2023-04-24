@@ -125,7 +125,7 @@ public class MainMenuBar extends JMenuBar implements ActionListener{
 		}
 		if (o.equals(mntmQLTour)) {
 			frame.setVisible(false);
-			new FrmQuanLyTour().setVisible(false);
+			new FrmQuanLyTour().setVisible(true);
 		}
 	}
 }

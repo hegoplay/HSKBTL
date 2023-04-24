@@ -36,7 +36,7 @@ import java.awt.GridLayout;
 public class FrmQLKhachHang extends JFrame{
 
 	private JPanel contentPane;
-	private JTable table;
+	public JTable table;
 	public JTextField txtHo;
 	public JTextField txtTen;
 	public JTextField txtDiachi;
@@ -173,6 +173,9 @@ public class FrmQLKhachHang extends JFrame{
 		
 		controller = new KhachHangController(this);
 		btnThem.addActionListener(controller);
-		
+		controller.fillTable();
+		table.addMouseListener(controller);
+		btnXoa.addActionListener(controller);
+		btnSua.addActionListener(controller);
 	}
 }

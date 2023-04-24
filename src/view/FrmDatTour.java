@@ -45,8 +45,10 @@ public class FrmDatTour extends JFrame {
 	public JComboBox<String> cbTinhThanh;
 	public DatTourController controller;
 	private JButton btnLoc;
-	private JButton btnChon;
-
+	public JButton btnChon;
+	public JTabbedPane tabbedPane;
+	public String diemDi = "";
+	public String diemDen = "";
 	/**
 	 * Launch the application.
 	 */
@@ -91,7 +93,7 @@ public class FrmDatTour extends JFrame {
 		lblTitle.setBackground(SystemColor.activeCaption);
 		pnlTitle.add(lblTitle);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
 		JPanel pnlKhachHang = new JPanel();
@@ -125,7 +127,7 @@ public class FrmDatTour extends JFrame {
 		JPanel pnlSDT = new JPanel();
 		pnlFieldSort.add(pnlSDT);
 		
-		JLabel lblSDT = new JLabel("SDT");
+		JLabel lblSDT = new JLabel("SDT:");
 		pnlSDT.add(lblSDT);
 		
 		txtSDT = new JTextField();
@@ -154,24 +156,17 @@ public class FrmDatTour extends JFrame {
 		JPanel pnlChucNang = new JPanel();
 		pnlFieldSort.add(pnlChucNang);
 		
-		btnLoc = new JButton("Lọc");
+		btnLoc = new JButton("Lọc Khách hàng");
 		
 		pnlChucNang.add(btnLoc);
 		
-		btnChon = new JButton("Chọn");
+		btnChon = new JButton("Chọn Khách hàng");
 		pnlChucNang.add(btnChon);
 		
 		tblKhachHang = new KhachHangTable();
 		
 		JScrollPane paneKH = new JScrollPane(tblKhachHang);
 		pnlKhachHang.add(paneKH, BorderLayout.CENTER);
-		
-		JPanel pnlKhachSan = new JPanel();
-		tabbedPane.addTab("New tab", null, pnlKhachSan, null);
-		pnlKhachSan.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel_1 = new JPanel();
-		pnlKhachSan.add(panel_1, BorderLayout.NORTH);
 		
 		
 
@@ -184,6 +179,12 @@ public class FrmDatTour extends JFrame {
 		
 		btnLoc.addActionListener(controller);
 		btnChon.addActionListener(controller);
+		
+		lblHo.setPreferredSize(lblEmail.getPreferredSize());
+		lblSDT.setPreferredSize(lblEmail.getPreferredSize());
+		lblTen.setPreferredSize(lblEmail.getPreferredSize());
+		
+		
 	}
 	
 }

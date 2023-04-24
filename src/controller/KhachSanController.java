@@ -11,6 +11,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import entity.KhachSan;
+import entity.TinhThanh;
 import model.DsTinhThanh;
 import model.KhachSanModel;
 import view.FrmQuanLyKhachSan;
@@ -178,5 +179,12 @@ public class KhachSanController implements ControllerTinhThanh,ActionListener,Co
 	public void deleteRow(KhachSan temp) {
 		// TODO Auto-generated method stub
 		model.deleteRow(temp);
+	}
+
+
+	@Override
+	public TinhThanh getTTTheoMa(String maTT) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

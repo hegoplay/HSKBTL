@@ -40,12 +40,13 @@ public class FrmQLVePhuongTien {
 	public JFrame frame;
 	public JComboBox<String> cbLoaiVe;
 	public JComboBox<String> cbTPDiemdi;
-	private JTextField textField;
+	public JTextField txtGia;
 	private JTable tblVePT;
-	private JTable table;
+	public JTable table;
 	private QuanLyVeController controller;
-	private JComboBox<String> cbTPDiemDen;
+	public JComboBox<String> cbTPDiemDen;
 	public JComboBox<String> cbTenCongTy;
+	public JRadioButton rdbtnNewRadioButton;
 
 	/**
 	 * Launch the application.
@@ -117,10 +118,10 @@ public class FrmQLVePhuongTien {
 		lblNewLabel_1_2.setBounds(314, 29, 155, 13);
 		pnlVePT.add(lblNewLabel_1_2);
 		
-		textField = new JTextField();
-		textField.setBounds(385, 23, 200, 26);
-		pnlVePT.add(textField);
-		textField.setColumns(10);
+		txtGia = new JTextField();
+		txtGia.setBounds(385, 23, 200, 26);
+		pnlVePT.add(txtGia);
+		txtGia.setColumns(10);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("TP Điểm Đến");
 		lblNewLabel_1_1_1_1.setBounds(595, 66, 70, 13);
@@ -132,7 +133,7 @@ public class FrmQLVePhuongTien {
 		
 		
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Đang hoạt động");
+		rdbtnNewRadioButton = new JRadioButton("Đang hoạt động");
 		rdbtnNewRadioButton.setBounds(591, 25, 159, 21);
 		pnlVePT.add(rdbtnNewRadioButton);
 		
@@ -181,5 +182,10 @@ public class FrmQLVePhuongTien {
 		panel_1.add(lblQunLV);
 		controller.fillLoaiVe();
 		controller.fillCongTyPT();
+		controller.fillTable();
+		btnThem.addActionListener(controller);
+		
+		
+		
 	}
 }

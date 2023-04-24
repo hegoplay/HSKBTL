@@ -44,8 +44,12 @@ public class KhachHangModel implements ControllerKhachHang{
 	@Override
 	public boolean themKH(KhachHang kh) {
 		// TODO Auto-generated method stub
+		if (ds.contains(kh)) {
+			return false;
+		}
 		ConnectDB cdb = ConnectDB.getInstance();
 		try {
+			
 			cdb.connect();
 			Connection c = cdb.getConnection();
 		
@@ -105,13 +109,15 @@ public class KhachHangModel implements ControllerKhachHang{
 				
 					String sql = "Update KhachHang set ho= ?,ten = ? , diaChi = ?,SDT = ?, email = ?,ngayDK = ? where maKH = ?";
 					PreparedStatement st = c.prepareStatement(sql);
-					st.setString(7, kh.getMaKH());
+					st.setNString(7, kh.getMaKH());
 					st.setNString(1, kh.getHo());
 					st.setNString(2, kh.getTen());
 					st.setNString(3, kh.getDiaChi());
 					st.setTimestamp(6, Timestamp.valueOf(kh.getNgayDk().atStartOfDay()) );
-					st.setString(4, kh.getSDT()+"");
+					
+					st.setString(4, kh.getSDT());
 					st.setString(5, kh.getEmail());
+					
 					int row = st.executeUpdate();
 					cdb.disconnect();
 					if (row >=1) return true;

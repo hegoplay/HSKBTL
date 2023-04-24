@@ -5,24 +5,46 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import component.MainMenuBar;
+import component.TourTable;
+import controller.TourController;
 
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.SystemColor;
+import java.util.Calendar;
+import java.util.Date;
 import java.awt.Font;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import com.toedter.components.JLocaleChooser;
+import com.toedter.calendar.JCalendar;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import com.toedter.components.JSpinField;
+import javax.swing.SpinnerNumberModel;
 
 public class FrmQuanLyTour extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtTenTour;
-
+	public JTextField txtTenTour;
+	public JTable table;
+	public JComboBox cbTPDiemDen;
+	public JComboBox cbTPDiemDi;
+	private TourController controller;
+	public JSpinner spinGioVe;
+	public JSpinner spinPhutVe;
+	public JSpinner spinPhutDi;
+	public JDateChooser dcNgayKetThuc;
+	public JSpinner spinGioDi;
+	public JDateChooser dcNgayBatDau;
 	/**
 	 * Launch the application.
 	 */
@@ -44,7 +66,7 @@ public class FrmQuanLyTour extends JFrame {
 	 */
 	public FrmQuanLyTour() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1000,600);
+		setSize(1200,600);
 		setLocationRelativeTo(null); 
 		setJMenuBar(new MainMenuBar(this));
 		setTitle("Hệ thống quản lý du lịch");
@@ -88,9 +110,22 @@ public class FrmQuanLyTour extends JFrame {
 		JLabel lblTgBatDau = new JLabel("Tg Bắt đầu");
 		pnlTgBatDau.add(lblTgBatDau);
 		
-		JDateChooser dcNgayBatDau = new JDateChooser();
-		dcNgayBatDau.setDateFormatString("d MMM, YYYY");
+		dcNgayBatDau = new JDateChooser();
 		pnlTgBatDau.add(dcNgayBatDau);
+		
+		JLabel lblGioDi = new JLabel("Giờ");
+		pnlTgBatDau.add(lblGioDi);
+		
+		spinGioDi = new JSpinner();
+		spinGioDi.setModel(new SpinnerNumberModel(0, 0, 23, 1));
+		pnlTgBatDau.add(spinGioDi);
+		
+		JLabel lblPhutDi = new JLabel("Phút");
+		pnlTgBatDau.add(lblPhutDi);
+		
+		spinPhutDi = new JSpinner();
+		spinPhutDi.setModel(new SpinnerNumberModel(0, 0, 59, 1));
+		pnlTgBatDau.add(spinPhutDi);
 		
 		JPanel pnlTgKetThuc = new JPanel();
 		pnlField.add(pnlTgKetThuc);
@@ -98,15 +133,40 @@ public class FrmQuanLyTour extends JFrame {
 		JLabel lblTgKetThuc = new JLabel("tg Kết thúc");
 		pnlTgKetThuc.add(lblTgKetThuc);
 		
-		JDateChooser dcNgayKetThuc = new JDateChooser();
-		dcNgayKetThuc.setDateFormatString("d MMM, YYYY");
+		dcNgayKetThuc = new JDateChooser();
 		pnlTgKetThuc.add(dcNgayKetThuc);
 		
-		JLabel lblTemp = new JLabel("");
-		pnlField.add(lblTemp);
+		JLabel lblGioVe = new JLabel("Giờ");
+		pnlTgKetThuc.add(lblGioVe);
 		
-		JLabel lblTemp1 = new JLabel("");
-		pnlField.add(lblTemp1);
+		spinGioVe = new JSpinner();
+		spinGioVe.setModel(new SpinnerNumberModel(0, 0, 23, 1));
+		pnlTgKetThuc.add(spinGioVe);
+		
+		JLabel lblPhutVe = new JLabel("Phút");
+		pnlTgKetThuc.add(lblPhutVe);
+		
+		spinPhutVe = new JSpinner();
+		spinPhutVe.setModel(new SpinnerNumberModel(0, 0, 59, 1));
+		pnlTgKetThuc.add(spinPhutVe);
+		
+		JPanel pnlTPDiemDi = new JPanel();
+		pnlField.add(pnlTPDiemDi);
+		
+		JLabel lblTPDiemDi = new JLabel("TP Điểm Đi");
+		pnlTPDiemDi.add(lblTPDiemDi);
+		
+		cbTPDiemDi = new JComboBox();
+		pnlTPDiemDi.add(cbTPDiemDi);
+		
+		JPanel pnlTPDiemDen = new JPanel();
+		pnlField.add(pnlTPDiemDen);
+		
+		JLabel lblTPDiemDen = new JLabel("TP Điểm Đen");
+		pnlTPDiemDen.add(lblTPDiemDen);
+		
+		cbTPDiemDen = new JComboBox();
+		pnlTPDiemDen.add(cbTPDiemDen);
 		
 		JPanel panel = new JPanel();
 		pnlField.add(panel);
@@ -119,6 +179,26 @@ public class FrmQuanLyTour extends JFrame {
 		
 		JButton btnSua = new JButton("Sửa");
 		panel.add(btnSua);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		pnlQL.add(scrollPane, BorderLayout.CENTER);
+		
+		
+		table = new TourTable();
+		scrollPane.setViewportView(table);
+		
+		controller = new TourController(this);
+		
+		controller.fillCbTT(cbTPDiemDen);
+		controller.fillCbTT(cbTPDiemDi);
+		
+		dcNgayBatDau.setDate(new Date());
+		Calendar now = Calendar.getInstance();
+		spinGioDi.setValue(now.get(Calendar.HOUR));
+		dcNgayKetThuc.setDate(new Date());
+		spinGioVe.setValue(now.get(Calendar.HOUR)+1);
+		btnThem.addActionListener(controller);
+		controller.fillDs();
 	}
 
 }

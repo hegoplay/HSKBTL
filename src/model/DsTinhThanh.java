@@ -64,5 +64,10 @@ public class DsTinhThanh implements ControllerTinhThanh {
 		}
 		return null;
 	}
+	@Override
+	public TinhThanh getTTTheoMa(String maTT) {
+		// TODO Auto-generated method stub
+		return ds.get(ds.indexOf(new TinhThanh(maTT)));
+	}
 	
 }
