@@ -198,6 +198,7 @@ public class FrmQuanLyTour extends JFrame {
 		dcNgayKetThuc.setDate(new Date());
 		spinGioVe.setValue(now.get(Calendar.HOUR)+1);
 		btnThem.addActionListener(controller);
+		btnXoa.addActionListener(controller);
 		controller.fillDs();
 	}
 

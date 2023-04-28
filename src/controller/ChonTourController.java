@@ -24,9 +24,10 @@ public class ChonTourController implements MouseListener,ActionListener {
 	public ChonTourController(PnlChonTour view) {
 		// TODO Auto-generated constructor stub
 		this.view = view;
+		
 	}
 	public void fillTable() {
-		
+		model.getDsKhongCoKH(view.txtMaKH.getText());
 		((DefaultTableModel) view.table.getModel()).setRowCount(0);
 		for (Tour x : model.getDs() ) {
 			((DefaultTableModel) view.table.getModel()).addRow(x.getObject());

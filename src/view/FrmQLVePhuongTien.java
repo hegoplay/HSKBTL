@@ -184,8 +184,10 @@ public class FrmQLVePhuongTien {
 		controller.fillCongTyPT();
 		controller.fillTable();
 		btnThem.addActionListener(controller);
-		
-		
-		
+		btnXoa.addActionListener(controller);
+		btnSua.addActionListener(controller);
+		btnXoaRong.addActionListener(controller);
+		FrmAboutUs ui = new FrmAboutUs();
+		ui.tableUI(table, pnlVePT, scrollPane);
 	}
 }

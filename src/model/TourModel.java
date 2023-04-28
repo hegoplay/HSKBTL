@@ -132,5 +132,30 @@ public class TourModel implements ControllerTour{
 			return false;
 		}
 	}
+	public void getDsKhongCoKH(String maKH) {
+		ConnectDB cdb = ConnectDB.getInstance();
+		try {
+			cdb.connect();
+			Connection c = cdb.getConnection();
+			ds = new ArrayList<Tour>();
+			String sql = "Select * from Tour where maTour not in (select maTour from KHTour where maKH = '" + maKH+ "')";
+			System.out.println(sql);
+			Statement st = c.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				String maTPDi = rs.getNString(5);
+				String maTPDen = rs.getNString(6);
+				
+				
+//				Blob bMoTa = rs.getBlob(5);
+//				String moTa = new String(bMoTa.getBytes(1L, (int)bMoTa.length()));
+				Tour tour = new Tour(rs.getString(1), rs.getNString(2), rs.getTimestamp(3).toLocalDateTime(), rs.getTimestamp(4).toLocalDateTime(), dsTT.getTTTheoMa(maTPDi), dsTT.getTTTheoMa(maTPDen));
+				ds.add(tour);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

@@ -120,7 +120,7 @@ public class FrmQuanLyKhachSan extends JFrame {
 		
 		JPanel pnlTenKS = new JPanel();
 		pnlValues.add(pnlTenKS);
-		pnlTenKS.setLayout(new BoxLayout(pnlTenKS, BoxLayout.X_AXIS));
+		pnlTenKS.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblNewLabel = new JLabel("Tên khách sạn");
 		lblNewLabel.setFont(new Font("Segoe UI Variable", Font.PLAIN, 18));
@@ -133,7 +133,7 @@ public class FrmQuanLyKhachSan extends JFrame {
 		
 		JPanel pnlTinhThanh = new JPanel();
 		pnlValues.add(pnlTinhThanh);
-		pnlTinhThanh.setLayout(new BoxLayout(pnlTinhThanh, BoxLayout.X_AXIS));
+		pnlTinhThanh.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblMaTinhThanh = new JLabel("Mã tỉnh thành");
 		lblMaTinhThanh.setFont(new Font("Segoe UI Variable", Font.PLAIN, 18));
@@ -146,7 +146,7 @@ public class FrmQuanLyKhachSan extends JFrame {
 		
 		JPanel pnlDiaChi = new JPanel();
 		pnlValues.add(pnlDiaChi);
-		pnlDiaChi.setLayout(new BoxLayout(pnlDiaChi, BoxLayout.X_AXIS));
+		pnlDiaChi.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblDiaChi = new JLabel("Địa chỉ");
 		lblDiaChi.setFont(new Font("Segoe UI Variable", Font.PLAIN, 18));

@@ -77,7 +77,8 @@ public class DatTourController implements ActionListener {
 				viewChonTour.txtEmail.setText((String)((DefaultTableModel)view.tblKhachHang.getModel()).getValueAt(row, 5));
 				
 				kh = khModel.getDs().get(row);
-				
+				view.tabbedPane.setSelectedIndex(1);
+				viewChonTour.controller.fillTable();
 			}
 			
 		}
@@ -85,8 +86,8 @@ public class DatTourController implements ActionListener {
 			int row = viewChonTour.table.getSelectedRow();
 			if (row >=0 && !viewChonTour.txtMaKH.equals(" ")) {
 				
-			tour = viewChonTour.controller.getTour();
-			
+				tour = viewChonTour.controller.getTour();
+				viewChonTour.controller.fillTable();
 			}
 		}
 	}

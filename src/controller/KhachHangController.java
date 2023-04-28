@@ -77,7 +77,7 @@ public class KhachHangController implements ActionListener,MouseListener{
 			return false;
 		}
 		String sdt = view.txtSDT.getText();
-		pattern = Pattern.compile("^\\+?\\d{10,12}$");
+		pattern = Pattern.compile("^(\\+\\d{1,3}})?\\d{9,11}$");
 		if (!pattern.matcher(sdt).matches()) {
 			showMsg(view.txtSDT, "So dien thoai phai khoang 9-11so");
 			return false;

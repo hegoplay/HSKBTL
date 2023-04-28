@@ -49,6 +49,7 @@ public class FrmDatTour extends JFrame {
 	public JTabbedPane tabbedPane;
 	public String diemDi = "";
 	public String diemDen = "";
+	public JScrollPane paneKH;
 	/**
 	 * Launch the application.
 	 */
@@ -165,7 +166,7 @@ public class FrmDatTour extends JFrame {
 		
 		tblKhachHang = new KhachHangTable();
 		
-		JScrollPane paneKH = new JScrollPane(tblKhachHang);
+		paneKH = new JScrollPane(tblKhachHang);
 		pnlKhachHang.add(paneKH, BorderLayout.CENTER);
 		
 		

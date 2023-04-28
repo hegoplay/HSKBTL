@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,7 +27,7 @@ import model.DsTinhThanh;
 import model.TourModel;
 import view.FrmQuanLyTour;
 
-public class TourController implements ActionListener,ControllerTour{
+public class TourController implements ActionListener,ControllerTour,MouseListener{
 
 	DsTinhThanh dsTT= new DsTinhThanh();
 	FrmQuanLyTour view;
@@ -44,6 +46,24 @@ public class TourController implements ActionListener,ControllerTour{
 		if (src.equals("Thêm")) {
 			if (checkVaild()) {
 				themTour(getTourFromField());
+				
+			}
+		}
+		if (src.equals("Xóa")) {
+			int row = view.table.getSelectedRow();
+			System.out.println(row);
+			if (row !=-1) {
+	
+				String maTour = (String)((DefaultTableModel)view.table.getModel()).getValueAt(row, 0);
+				model.xoaTour(new Tour(maTour));
+			}
+		}
+		if (src.equals("Sửa")) {
+			int row = view.table.getSelectedRow();
+			
+			if (row !=-1) {
+	
+			
 			}
 		}
 	}
@@ -64,9 +84,9 @@ public class TourController implements ActionListener,ControllerTour{
 	@Override
 	public void fillDs() {
 		// TODO Auto-generated method stub
+		((DefaultTableModel)view.table.getModel()).setRowCount(0);
 		for(Tour x : model.getDs()) {
-			System.out.println(x.getMaTour());
-			((DefaultTableModel)view.table.getModel()).setRowCount(0);
+			
 			((DefaultTableModel)view.table.getModel()).addRow(x.getObject());
 		}
 	}
@@ -108,9 +128,11 @@ public class TourController implements ActionListener,ControllerTour{
 	@Override
 	public boolean themTour(Tour tour) {
 		// TODO Auto-generated method stub
-		if (model.themTour(tour)) {
+		model.themTour(tour);
+		((DefaultTableModel)view.table.getModel()).setRowCount(0);
+		for(Tour x : model.getDs()) {
 			
-			fillDs();
+			((DefaultTableModel)view.table.getModel()).addRow(x.getObject());
 		}
 		
 		
@@ -151,6 +173,43 @@ public class TourController implements ActionListener,ControllerTour{
 			
 		}
 		return true;
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int row = view.table.getSelectedRow();
+		view.txtTenTour.setText((String)((DefaultTableModel)view.table.getModel()).getValueAt(row, 1));
+	
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

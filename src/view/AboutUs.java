@@ -69,6 +69,7 @@ public class AboutUs extends JFrame implements ActionListener {
         pButtons.setLayout(new GridLayout(6, 1, 10, 10));
         pButtons.add(btnNV = new JButton("Nhân Viên"));
         pButtons.add(btnKH = new JButton("Khách Hàng"));
+//        pButtons.add(btnTour =  new JButton("Tour"));
         pButtons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
 
@@ -92,7 +93,7 @@ public class AboutUs extends JFrame implements ActionListener {
 //        buttons
         ui.buttonUI(btnKH);
         ui.buttonUI(btnNV);
-
+        
 //        text area
         tpDesc.setEditable(false);
         tpDesc.setMargin(new Insets(30, 30, 30, 30));
@@ -121,11 +122,15 @@ public class AboutUs extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object cmd = e.getSource();
         if (cmd.equals(btnKH))
-            tpDesc.setText("QUẢN LÝ KHÁCH HÀNG\n");
+            tpDesc.setText("Đặt tour\n"+
+                    "\t+ Chức năng dùng để đặt tour cho khách hàng\n" +
+                    "\t+ B1: chọn khách hàng muốn đặt tour\n" +
+                    "\t+ B2: Chọn tour cho khách hàng\n");
         else if (cmd.equals(btnNV))
             tpDesc.setText("QUẢN LÝ NHÂN VIÊN\n" +
                     "\t+ Sửa: sửa thông tin nhân viên trong danh sách\n" +
                     "\t+ Thêm: thêm nhân viên mới vào danh sách\n" +
                     "\t+ Xóa: xóa nhân viên khỏi danh sách");
+        else ì (cmd.equals(btn))
     }
 }

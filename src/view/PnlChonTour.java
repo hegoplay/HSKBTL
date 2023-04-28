@@ -161,7 +161,7 @@ public class PnlChonTour extends JPanel {
 		JButton btnChonTour = new JButton("Chọn Tour");
 		pnlChucNang.add(btnChonTour);
 		
-		controller.fillTable();
+
 		table.addMouseListener(controller);
 		btnChonTour.addActionListener(controller);
 	}

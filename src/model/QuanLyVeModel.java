@@ -247,6 +247,47 @@ public class QuanLyVeModel implements ControllerQuanLyVe{
 		}
 		return null;
 	}
-	
+	public void xoaVe(int maVe) {
+		ConnectDB cdb = ConnectDB.getInstance();
+		try {
+			cdb.connect();
+			Connection c = cdb.getConnection();
+			DsTinhThanh dsTT = new DsTinhThanh();
+			String sql = "delete from VeDiChuyen where maVe = ? ";	
+			PreparedStatement st = c.prepareStatement(sql);
+			st.setInt(1, maVe);
+			int i = st.executeUpdate();
+			cdb.disconnect();
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void suaVe(VePhuongTien ve) {
+		ConnectDB cdb = ConnectDB.getInstance();
+		try {
+			cdb.connect();
+			Connection c = cdb.getConnection();
+			DsTinhThanh dsTT = new DsTinhThanh();
+			String sql = "update VeDiChuyen set maCongTy = ?, maLoaiVe = ?,maTinhDiemDi = ?, maTinhDiemDen= ?, giaVe = ? ,conHoatDong = ? where maVe = ? ";	
+			PreparedStatement st = c.prepareStatement(sql);
+			st.setInt(7, ve.getMaVe());
+			st.setInt(1, getMaCT(ve.getCtpt()));
+			st.setInt(2, getMaVe(ve.getLoaiVe()));
+			st.setString(3, ve.getTpDiemDi().getMaTinhThanh());
+			st.setString(4,ve.getTpDiemDen().getMaTinhThanh());
+			st.setDouble(5, ve.getGiaVe());
+			st.setBoolean(6, ve.isConHoatDong());
+			int i = st.executeUpdate();
+			cdb.disconnect();
+
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

@@ -35,6 +35,29 @@ public class QuanLyVeController implements ActionListener,ControllerQuanLyVe{
 				fillTable();
 			}
 		}
+		if (src.equals("Xóa")) {
+			int row = view.table.getSelectedRow();
+			if (row != -1) {
+				model.xoaVe((Integer)view.table.getValueAt(row, 0));
+				fillTable();
+			}
+			
+		}
+		if (src.equals("Sửa")) {
+			int row = view.table.getSelectedRow();
+			VePhuongTien ve = getVeFromField();
+			if (row != -1) {
+				ve.setMaVe((Integer)view.table.getValueAt(row, 0));
+				model.suaVe(ve);
+				fillTable();
+			}
+			
+			
+		}
+		if(src.equals("Cancel")) {
+			view.table.clearSelection();
+			view.txtGia.setText("");
+		}
 	}
 	@Override
 	public void fillCbTT(JComboBox<String> cbBox) {
