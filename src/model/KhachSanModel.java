@@ -1,53 +1,48 @@
 package model;
-
 import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
-import connectDB.ConnectDB;
-import controller.ControllerKhachSan;
 import entity.KhachSan;
-
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.util.ArrayList;
+import connectDB.ConnectDB;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import controller.ControllerKhachSan;
 public class KhachSanModel implements ControllerKhachSan {
 	private ArrayList<KhachSan> ds = new ArrayList<KhachSan>();
 	private ArrayList<KhachSan> dsLoc;
-	public KhachSanModel() {
+	public KhachSanModel(){
 		// TODO Auto-generated constructor stub
 		ConnectDB cdb = ConnectDB.getInstance();
 		try {
 			cdb.connect();
 			Connection c = cdb.getConnection();
-		
 			String sql = "Select * from KhachSan";
 			Statement st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
-			while (rs.next()) {
+			while(rs.next()){
 				String maTT = rs.getNString(3);
 				DsTinhThanh dsTT = new DsTinhThanh();
-//				Blob bMoTa = rs.getBlob(5);
-//				String moTa = new String(bMoTa.getBytes(1L, (int)bMoTa.length()));
 				KhachSan ks = new KhachSan(rs.getInt(1), rs.getNString(2), dsTT.getTenTTTheoMa(maTT), rs.getNString(4), rs.getString(5), rs.getBoolean(6), rs.getBoolean(7));
 				ds.add(ks);
 			}
-		} catch (SQLException e) {
+		} 
+        catch(SQLException e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	@Override
-	public void fillTable() {
+	public void fillTable(){
 		// TODO Auto-generated method stub
 		
 	}
-	public ArrayList<KhachSan> getDS() {
+	public ArrayList<KhachSan> getDS(){
 		return ds;
 	}
 	@Override
-	public void locTable(String tenTinhThanh, boolean isThanhVien,boolean dangHoatDong,boolean isGiam) {
+	public void locTable(String tenTinhThanh, boolean isThanhVien,boolean dangHoatDong,boolean isGiam){
 		dsLoc = new ArrayList<KhachSan>();
 		ConnectDB cdb = ConnectDB.getInstance();
 		try {
@@ -55,21 +50,21 @@ public class KhachSanModel implements ControllerKhachSan {
 			Connection c = cdb.getConnection();
 			DsTinhThanh dsTT = new DsTinhThanh();
 			String sql;
-			if (tenTinhThanh.equals("")) {
-				sql = "Select * from KhachSan where laThanhVien = '" + (isThanhVien ? "True" : "False")+"' and conHoatDong = '" + (dangHoatDong ? "True" : "False")+
-						"' order by maKhachSan " + (isGiam ? "desc" : "asc");
+			if(tenTinhThanh.equals("")){
+				sql = "Select * from KhachSan where laThanhVien = '" + (isThanhVien ? "True" : "False")+"' and conHoatDong = '" + (dangHoatDong ? "True" : "False") + 
+                    "'order by maKhachSan " + (isGiam ? "desc" : "asc");
 			}
-			
-			else sql = "Select * from KhachSan where maTinhThanh = '" + dsTT.getMaTinhThanh(tenTinhThanh) + "' and laThanhVien = '" + (isThanhVien ? "True" : "False")+"' and conHoatDong = '" + (dangHoatDong ? "True" : "False")+
-					"' order by maKhachSan " + (isGiam ? "desc" : "asc");
+			else sql = "Select * from KhachSan where maTinhThanh = '" + dsTT.getMaTinhThanh(tenTinhThanh) + "' and laThanhVien = '" + (isThanhVien ? "True" : "False") + 
+                "' and conHoatDong = '" + (dangHoatDong ? "True" : "False")+ "' order by maKhachSan " + (isGiam ? "desc" : "asc");
 			Statement st = c.createStatement();
 			ResultSet rs = st.executeQuery(sql);
-			while (rs.next()) {
+			while(rs.next()){
 				String maTT = rs.getNString(3);
 				KhachSan ks = new KhachSan(rs.getInt(1), rs.getNString(2), dsTT.getTenTTTheoMa(maTT), rs.getNString(4), rs.getString(5), rs.getBoolean(6), rs.getBoolean(7));
 				dsLoc.add(ks);
 			}
-		} catch (SQLException e) {
+		} 
+        catch(SQLException e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -79,7 +74,7 @@ public class KhachSanModel implements ControllerKhachSan {
 		return dsLoc;
 	}
 	@Override
-	public void addRow(KhachSan temp) {
+	public void addRow(KhachSan temp){
 		// TODO Auto-generated method stub
 		ConnectDB cdb = ConnectDB.getInstance();
 		try {
@@ -96,13 +91,14 @@ public class KhachSanModel implements ControllerKhachSan {
 			st.setBoolean(6, temp.isConHoatDong());
 			int i = st.executeUpdate();
 			cdb.disconnect();
-		} catch (SQLException e) {
+		} 
+        catch(SQLException e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	@Override
-	public void fixRow(KhachSan temp) {
+	public void fixRow(KhachSan temp){
 		// TODO Auto-generated method stub
 		ConnectDB cdb = ConnectDB.getInstance();
 		try {
@@ -120,14 +116,15 @@ public class KhachSanModel implements ControllerKhachSan {
 			st.setInt(7, temp.getMaKS());
 			int i = st.executeUpdate();
 			System.out.println(i);
-		} catch (SQLException e) {
+		} 
+        catch (SQLException e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		cdb.disconnect();
 	}
 	@Override
-	public void deleteRow(KhachSan temp) {
+	public void deleteRow(KhachSan temp){
 		// TODO Auto-generated method stub
 		ConnectDB cdb = ConnectDB.getInstance();
 		try {
@@ -138,7 +135,8 @@ public class KhachSanModel implements ControllerKhachSan {
 			PreparedStatement st = c.prepareStatement(sql);
 			st.setInt(1, temp.getMaKS());
 			int i = st.executeUpdate();
-		} catch (SQLException e) {
+		} 
+        catch(SQLException e){
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

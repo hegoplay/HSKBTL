@@ -1,10 +1,7 @@
 package test;
-
 import view.FrmQLKhachHang;
-
-
 public class TestQLTourController {
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		FrmQLKhachHang frm = new FrmQLKhachHang();
 		frm.setVisible(true);
 		frm.txtHo.setText("Luu");

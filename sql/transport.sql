@@ -1,21 +1,18 @@
 ﻿go
 use QLDuLich
-
-create table LoaiVe (
+create table LoaiVe(
 	maLoaiVe int primary key,
 	tenLoaiVe nvarchar(20)
-)
-
+);
 go
 use QLDuLich
 create table LoaiPhuongTien(
 	maLoai int identity(1,1) primary key,
 	tenLoai nvarchar(20)
-)
-
+);
 go
 use QLDuLich
-create table CongTyPhuongTien (
+create table CongTyPhuongTien(
 	maCongTy int identity(1,1) primary key,
 	tenCongTy nvarchar(50),
 	maTinhThanh nvarchar(20) not null,
@@ -24,12 +21,10 @@ create table CongTyPhuongTien (
 	moTa text,
 	laThanhVien bit,
 	conHoatDong bit
-)
-
+);
 alter table CongTyPhuongTien add constraint maTinhThanh_CTPT_fkey foreign key (maTinhThanh) references TinhThanh(maTinhThanh) on delete cascade
 alter table CongTyPhuongTien add constraint maLoaiPhuongTien_CTPT_fkey foreign key (maLoaiPhuongTien) references LoaiPhuongTien(maLoai)
 --alter table CongTyPhuongTien drop constraint maLoaiPhuongTien_CTPT_fkey
-
 go
 use QLDuLich
 create table VeDiChuyen(
@@ -40,12 +35,10 @@ create table VeDiChuyen(
 	maTinhDiemDen nvarchar (20) not null,
 	giaVe money not null,
 	conHoatDong bit
-)
-
+);
 alter table VeDiChuyen add constraint maTinhDiemDi_VDC_fkey foreign key (maTinhDiemDi) references TinhThanh(maTinhThanh) on delete cascade
 alter table VeDiChuyen add constraint maTinhDiemDen_VDC_fkey foreign key (maTinhDiemDen) references TinhThanh(maTinhThanh)
 alter table VeDiChuyen add constraint maLoaiVe_VDC_fkey foreign key (maLoaiVe) references LoaiVe(maLoaiVe)
 --alter table VeDiChuyen drop constraint maLoaiVe_VDC_fkey
 alter table VeDiChuyen add constraint maCongTy_VDC_fkey foreign key (maCongTy) references CongTyPhuongTien(maCongTy)
-
 Select tenCongTy from CongTyPhuongTien
