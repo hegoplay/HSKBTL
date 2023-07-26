@@ -1,11 +1,7 @@
 package controller;
-
-import java.util.ArrayList;
-
-import javax.swing.JComboBox;
-
 import entity.VePhuongTien;
-
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 public interface ControllerQuanLyVe {
 	public void fillCbTT(JComboBox<String> cbBox);
 	public int getMaVe(String kieuVe);

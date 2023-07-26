@@ -1,7 +1,5 @@
 package controller;
-
 import entity.KhachHang;
-
 public interface ControllerKhachHang {
 	public boolean themKH(KhachHang kh);
 	public void getTable();

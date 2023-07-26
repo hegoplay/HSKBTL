@@ -1,9 +1,6 @@
 package controller;
-
-import java.util.ArrayList;
-
 import entity.Tour;
-
+import java.util.ArrayList;
 public interface ControllerTour {
 	public ArrayList<Tour> getDs();
 	public void fillDs();
