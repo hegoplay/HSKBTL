@@ -28,13 +28,13 @@ alter table CongTyPhuongTien add constraint maLoaiPhuongTien_CTPT_fkey foreign k
 go
 use QLDuLich
 create table VeDiChuyen(
-	maVe int identity(1,1) primary key,
-	maCongTy int not null,
-	maLoaiVe int not null,
-	maTinhDiemDi nvarchar(20) not null,
-	maTinhDiemDen nvarchar (20) not null,
-	giaVe money not null,
-	conHoatDong bit
+    maVe int identity(1,1) primary key,
+    maCongTy int not null,
+    maLoaiVe int not null,
+    maTinhDiemDi nvarchar(20) not null,
+    maTinhDiemDen nvarchar (20) not null,
+    giaVe money not null,
+    conHoatDong bit
 );
 alter table VeDiChuyen add constraint maTinhDiemDi_VDC_fkey foreign key (maTinhDiemDi) references TinhThanh(maTinhThanh) on delete cascade
 alter table VeDiChuyen add constraint maTinhDiemDen_VDC_fkey foreign key (maTinhDiemDen) references TinhThanh(maTinhThanh)
